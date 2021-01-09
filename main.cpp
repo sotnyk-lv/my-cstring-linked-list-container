@@ -1,7 +1,7 @@
 #include <iostream>
 
 //#include "MyLinkedList.h"
-#include "MyLinkedListCyclic.h"
+#include "linked_cyclic_list/my_linked_cyclic_list.h"
 
 int main() {
 

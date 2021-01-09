@@ -2,7 +2,7 @@
 // Created by sotnyk on 21.12.20.
 //
 
-#include "MyLinkedList.h"
+#include "my_linked_list.h"
 
 #define WORD 0
 #define NEXT_NODE 1

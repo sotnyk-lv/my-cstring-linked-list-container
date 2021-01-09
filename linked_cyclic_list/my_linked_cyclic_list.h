@@ -2,8 +2,8 @@
 // Created by sotnyk on 22.12.20.
 //
 
-#ifndef LINKED_LIST_MYLINKEDLISTCYCLIC_H
-#define LINKED_LIST_MYLINKEDLISTCYCLIC_H
+#ifndef LINKED_LIST_MY_LINKED_CYCLIC_LIST_H
+#define LINKED_LIST_MY_LINKED_CYCLIC_LIST_H
 
 #include <stdlib.h>
 #include <string.h>
@@ -34,4 +34,4 @@ void StringListRemove(char** list, char* str);
 void StringListAdd(char** list, char* str);
 void SwapNodes(char** first, char** second);
 
-#endif //LINKED_LIST_MYLINKEDLISTCYCLIC_H
+#endif //LINKED_LIST_MY_LINKED_CYCLIC_LIST_H
