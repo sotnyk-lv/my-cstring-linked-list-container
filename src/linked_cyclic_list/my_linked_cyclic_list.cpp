@@ -1,7 +1,3 @@
-//
-// Created by sotnyk on 22.12.20.
-//
-
 #include "my_linked_cyclic_list.h"
 
 #define WORD 0

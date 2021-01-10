@@ -1,7 +1,3 @@
-//
-// Created by sotnyk on 21.12.20.
-//
-
 #include "my_linked_list.h"
 
 #define WORD 0
@@ -59,7 +55,7 @@ void StringListAdd(char** list, std::string str) {
 
 void StringPrint(char** list) {
     if (StringIsEmpty(list)) {
-        std::cout << "empty list" << std::endl;
+        std::cout << "empty src" << std::endl;
         return;
     }
     char** curr_node = list;

@@ -7,7 +7,7 @@ int main() {
 
     char **list = nullptr;
     StringListInit(&list);
-//    StringListInit(&list, "wabc");
+//    StringListInit(&src, "wabc");
 
     StringListAdd(list, "word");
     StringPrint(list);
