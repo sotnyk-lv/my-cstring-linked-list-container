@@ -56,6 +56,12 @@ int main() {
     StringPrint(list);
     std::cout << StringListSize(list) << "\n" << std::endl;
 
+//    char** test_list;
+//    StringListToString(list, test_list);
+//    for (int i=0; i<StringListSize(list); ++i) {
+//        std::cout << i << " " << test_list[i] << std::endl;
+//    }
+
     StringListDestroy(&list);
 
     return 0;
