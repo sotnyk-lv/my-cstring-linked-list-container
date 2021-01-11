@@ -29,6 +29,6 @@ void DeleteNode(char** node);
 void StringListRemove(char** list, char* str);
 void StringListAdd(char** list, char* str);
 void SwapNodes(char** first, char** second);
-void StringListToString(char** list, char** res);
+void StringListToString(char** list, char*** res);
 
 #endif //LINKED_LIST_MY_LINKED_CYCLIC_LIST_H

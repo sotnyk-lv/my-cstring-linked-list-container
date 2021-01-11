@@ -184,16 +184,21 @@ void StringListSort(char** list) {
     }
 }
 
-void StringListToString(char** list, char** res) {
+void StringListToString(char** list, char*** result) {
     char** curr_node = reinterpret_cast<char **>(list[NEXT_NODE]);
-    res = (char**) malloc(StringListSize(list) * sizeof(char*));
+    char** res = (char**) malloc(StringListSize(list) * sizeof(char*));
     long i = 0;
+    if (curr_node[WORD] == nullptr) {
+        res[i] = strdup("");
+    }
     while (curr_node[WORD] != nullptr) {
         char* curr_word = (char*) malloc(strlen(curr_node[WORD]) * sizeof(char*));
         strcpy(curr_word, curr_node[WORD]);
         res[i] = curr_word;
         curr_node = reinterpret_cast<char **>(curr_node[NEXT_NODE]);
+        ++i;
     }
+    *result = res;
 }
 
 

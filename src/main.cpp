@@ -1,6 +1,5 @@
 #include <iostream>
 
-//#include "MyLinkedList.h"
 #include "linked_cyclic_list/my_linked_cyclic_list.h"
 
 int main() {
@@ -15,7 +14,7 @@ int main() {
     std::cout << StringListSize(list) << "\n" << std::endl;
 
 
-    StringListAdd(list, "secondword");
+    StringListAdd(list, "second_word");
     StringListAdd(list, "3word");
     StringListAdd(list, "4");
     StringListAdd(list, "five");
@@ -56,11 +55,15 @@ int main() {
     StringPrint(list);
     std::cout << StringListSize(list) << "\n" << std::endl;
 
-//    char** test_list;
-//    StringListToString(list, test_list);
-//    for (int i=0; i<StringListSize(list); ++i) {
-//        std::cout << i << " " << test_list[i] << std::endl;
-//    }
+    char** test_list;
+    StringListToString(list, &test_list);
+    for (int i=0; i<StringListSize(list); ++i) {
+        std::cout << i << " " << test_list[i] << std::endl;
+        free(test_list[i]);
+        test_list[i] = nullptr;
+    }
+    free(test_list);
+    test_list = nullptr;
 
     StringListDestroy(&list);
 
