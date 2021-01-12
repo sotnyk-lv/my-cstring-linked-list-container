@@ -61,8 +61,8 @@ void StringPrint(char** list) {
     char** curr_node = reinterpret_cast<char **>(list[NEXT_NODE]);
     while (curr_node[WORD] != nullptr)
     {
-//        std::cout << curr_node[PREV_NODE][WORD] << "-" << curr_node[WORD] << "-" << curr_node[NEXT_NODE][WORD] << std::endl;
-        std::cout << curr_node[WORD] << std::endl;
+//        std::cout << curr_node[WORD] << std::endl;
+        printf("%s\n", curr_node[WORD]);
         curr_node = reinterpret_cast<char **>(curr_node[NEXT_NODE]);
     }
 }
@@ -182,6 +182,23 @@ void StringListSort(char** list) {
             second = reinterpret_cast<char **>(first[NEXT_NODE]);
         }
     }
+}
+
+void StringListToString(char** list, char*** result) {
+    char** curr_node = reinterpret_cast<char **>(list[NEXT_NODE]);
+    char** res = (char**) malloc(StringListSize(list) * sizeof(char*));
+    long i = 0;
+    if (curr_node[WORD] == nullptr) {
+        res[i] = strdup("");
+    }
+    while (curr_node[WORD] != nullptr) {
+        char* curr_word = (char*) malloc(strlen(curr_node[WORD]) * sizeof(char*));
+        strcpy(curr_word, curr_node[WORD]);
+        res[i] = curr_word;
+        curr_node = reinterpret_cast<char **>(curr_node[NEXT_NODE]);
+        ++i;
+    }
+    *result = res;
 }
 
 
