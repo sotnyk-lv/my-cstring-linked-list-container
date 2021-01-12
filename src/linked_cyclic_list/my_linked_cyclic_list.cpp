@@ -61,8 +61,8 @@ void StringPrint(char** list) {
     char** curr_node = reinterpret_cast<char **>(list[NEXT_NODE]);
     while (curr_node[WORD] != nullptr)
     {
-//        std::cout << curr_node[PREV_NODE][WORD] << "-" << curr_node[WORD] << "-" << curr_node[NEXT_NODE][WORD] << std::endl;
-        std::cout << curr_node[WORD] << std::endl;
+//        std::cout << curr_node[WORD] << std::endl;
+        printf("%s\n", curr_node[WORD]);
         curr_node = reinterpret_cast<char **>(curr_node[NEXT_NODE]);
     }
 }
