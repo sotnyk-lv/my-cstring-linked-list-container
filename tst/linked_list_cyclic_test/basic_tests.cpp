@@ -54,7 +54,7 @@ TEST(list_size, multiple_element_list_size) {
     ASSERT_EQ(StringListSize(list), 1);
     StringListAdd(list, element);
     ASSERT_EQ(StringListSize(list), 2);
-    StringListAdd(list, "super_new_string");
+    StringListAdd(list, (char*)"super_new_string");
     ASSERT_EQ(StringListSize(list), 3);
 
     StringListDestroy(&list);
@@ -161,9 +161,9 @@ TEST(list_to_array, multiple_element_list_to_array) {
     char element[] = "new_string";
     StringListAdd(list, element);
     StringListAdd(list, element);
-    StringListAdd(list, "element");
-    StringListAdd(list, "");
-    StringListAdd(list, "0");
+    StringListAdd(list, (char*)"element");
+    StringListAdd(list, (char*)"");
+    StringListAdd(list, (char*)"0");
     char **arr;
     StringListToString(list, &arr);
 
@@ -219,10 +219,10 @@ TEST(list_print, multiple_element_list_print) {
 
     char **list = nullptr;
     StringListInit(&list);
-    StringListAdd(list, "first_string");
-    StringListAdd(list, "second_string");
-    StringListAdd(list, "");
-    StringListAdd(list, "fourth_string");
+    StringListAdd(list, (char*)"first_string");
+    StringListAdd(list, (char*)"second_string");
+    StringListAdd(list, (char*)"");
+    StringListAdd(list, (char*)"fourth_string");
     StringPrint(list);
 
     std::string output = testing::internal::GetCapturedStdout();
@@ -235,7 +235,7 @@ TEST(list_print, multiple_element_list_print) {
 TEST(list_remove, empty_list_remove) {
     char **list = nullptr;
     StringListInit(&list);
-    StringListRemove(list, "odd");
+    StringListRemove(list, (char*)"odd");
 
     ASSERT_TRUE(list != nullptr);
     ASSERT_TRUE(list[WORD] == nullptr);
@@ -248,8 +248,8 @@ TEST(list_remove, empty_list_remove) {
 TEST(list_remove, single_element_list_remove_not_present) {
     char **list = nullptr;
     StringListInit(&list);
-    StringListAdd(list, "odd");
-    StringListRemove(list, "od");
+    StringListAdd(list, (char*)"odd");
+    StringListRemove(list, (char*)"od");
 
     ASSERT_EQ(StringListSize(list), 1);
 
@@ -265,8 +265,8 @@ TEST(list_remove, single_element_list_remove_not_present) {
 TEST(list_remove, single_element_list_remove_present) {
     char **list = nullptr;
     StringListInit(&list);
-    StringListAdd(list, "odd");
-    StringListRemove(list, "odd");
+    StringListAdd(list, (char*)"odd");
+    StringListRemove(list, (char*)"odd");
 
     ASSERT_EQ(StringListSize(list), 0);
     ASSERT_TRUE(list != nullptr);
@@ -287,13 +287,13 @@ TEST(list_remove, single_element_list_remove_present) {
 TEST(list_remove, multiple_element_list_remove_not_present) {
     char **list = nullptr;
     StringListInit(&list);
-    StringListAdd(list, "odd");
-    StringListAdd(list, "add");
-    StringListAdd(list, "sub");
-    StringListAdd(list, "");
-    StringListAdd(list, "dodd");
+    StringListAdd(list, (char*)"odd");
+    StringListAdd(list, (char*)"add");
+    StringListAdd(list, (char*)"sub");
+    StringListAdd(list, (char*)"");
+    StringListAdd(list, (char*)"dodd");
 
-    StringListRemove(list, "dd");
+    StringListRemove(list, (char*)"dd");
 
     ASSERT_EQ(StringListSize(list), 5);
 
@@ -314,15 +314,15 @@ TEST(list_remove, multiple_element_list_remove_not_present) {
 TEST(list_remove, multiple_element_list_remove_present) {
     char **list = nullptr;
     StringListInit(&list);
-    StringListAdd(list, "dd");
-    StringListAdd(list, "odd");
-    StringListAdd(list, "add");
-    StringListAdd(list, "sub");
-    StringListAdd(list, "dd");
-    StringListAdd(list, "");
-    StringListAdd(list, "dodd");
+    StringListAdd(list, (char*)"dd");
+    StringListAdd(list, (char*)"odd");
+    StringListAdd(list, (char*)"add");
+    StringListAdd(list, (char*)"sub");
+    StringListAdd(list, (char*)"dd");
+    StringListAdd(list, (char*)"");
+    StringListAdd(list, (char*)"dodd");
 
-    StringListRemove(list, "dd");
+    StringListRemove(list, (char*)"dd");
 
     ASSERT_EQ(StringListSize(list), 5);
 
@@ -343,13 +343,13 @@ TEST(list_remove, multiple_element_list_remove_present) {
 TEST(list_remove, multiple_element_list_remove_string) {
     char **list = nullptr;
     StringListInit(&list);
-    StringListAdd(list, "dd");
-    StringListAdd(list, "odd");
-    StringListAdd(list, "add");
-    StringListAdd(list, "sub");
-    StringListAdd(list, "dd");
-    StringListAdd(list, "");
-    StringListAdd(list, "dodd");
+    StringListAdd(list, (char*)"dd");
+    StringListAdd(list, (char*)"odd");
+    StringListAdd(list, (char*)"add");
+    StringListAdd(list, (char*)"sub");
+    StringListAdd(list, (char*)"dd");
+    StringListAdd(list, (char*)"");
+    StringListAdd(list, (char*)"dodd");
 
     std::string rem_str = "dd";
     StringListRemove(list, rem_str);
@@ -389,7 +389,7 @@ TEST(list_index_of, empty_list_index_of) {
 TEST(list_index_of, single_element_list_index_of_not_present) {
     char **list = nullptr;
     StringListInit(&list);
-    StringListAdd(list, "b");
+    StringListAdd(list, (char*)"b");
     char value[] = "a";
     int index = StringListIndexOf(list, value);
 
@@ -410,7 +410,7 @@ TEST(list_index_of, single_element_list_index_of_not_present) {
 TEST(list_index_of, single_element_list_index_of_present) {
     char **list = nullptr;
     StringListInit(&list);
-    StringListAdd(list, "a");
+    StringListAdd(list, (char*)"a");
     char value[] = "a";
     int index = StringListIndexOf(list, value);
 
@@ -430,12 +430,12 @@ TEST(list_index_of, single_element_list_index_of_present) {
 TEST(list_index_of, multiple_elements_list_index_of_not_present) {
     char **list = nullptr;
     StringListInit(&list);
-    StringListAdd(list, "a");
-    StringListAdd(list, "b");
-    StringListAdd(list, "c");
-    StringListAdd(list, "d");
-    StringListAdd(list, "");
-    StringListAdd(list, "e");
+    StringListAdd(list, (char*)"a");
+    StringListAdd(list, (char*)"b");
+    StringListAdd(list, (char*)"c");
+    StringListAdd(list, (char*)"d");
+    StringListAdd(list, (char*)"");
+    StringListAdd(list, (char*)"e");
     char value[] = "f";
     int index = StringListIndexOf(list, value);
 
@@ -460,12 +460,12 @@ TEST(list_index_of, multiple_elements_list_index_of_not_present) {
 TEST(list_index_of, multiple_elements_list_index_of_present) {
     char **list = nullptr;
     StringListInit(&list);
-    StringListAdd(list, "a");
-    StringListAdd(list, "b");
-    StringListAdd(list, "c");
-    StringListAdd(list, "d");
-    StringListAdd(list, "");
-    StringListAdd(list, "e");
+    StringListAdd(list, (char*)"a");
+    StringListAdd(list, (char*)"b");
+    StringListAdd(list, (char*)"c");
+    StringListAdd(list, (char*)"d");
+    StringListAdd(list, (char*)"");
+    StringListAdd(list, (char*)"e");
     char value_a[] = "a";
     char value_b[] = "b";
     char value_c[] = "c";
@@ -519,7 +519,7 @@ TEST(list_remove_duplicates, empty_list_remove_duplicates) {
 TEST(list_remove_duplicates, single_element_list_remove_duplicates) {
     char **list = nullptr;
     StringListInit(&list);
-    StringListAdd(list, "b");
+    StringListAdd(list, (char*)"b");
     StringListRemoveDuplicates(list);
 
     ASSERT_EQ(StringListSize(list), 1);
@@ -538,12 +538,12 @@ TEST(list_remove_duplicates, single_element_list_remove_duplicates) {
 TEST(list_remove_duplicates, multiple_element_list_remove_duplicates_no_duplicates) {
     char **list = nullptr;
     StringListInit(&list);
-    StringListAdd(list, "a");
-    StringListAdd(list, "b");
-    StringListAdd(list, "c");
-    StringListAdd(list, "d");
-    StringListAdd(list, "");
-    StringListAdd(list, "e");
+    StringListAdd(list, (char*)"a");
+    StringListAdd(list, (char*)"b");
+    StringListAdd(list, (char*)"c");
+    StringListAdd(list, (char*)"d");
+    StringListAdd(list, (char*)"");
+    StringListAdd(list, (char*)"e");
 
     StringListRemoveDuplicates(list);
 
@@ -568,16 +568,16 @@ TEST(list_remove_duplicates, multiple_element_list_remove_duplicates_no_duplicat
 TEST(list_remove_duplicates, multiple_element_list_remove_duplicates) {
     char **list = nullptr;
     StringListInit(&list);
-    StringListAdd(list, "a");
-    StringListAdd(list, "b");
-    StringListAdd(list, "c");
-    StringListAdd(list, "");
-    StringListAdd(list, "");
-    StringListAdd(list, "d");
-    StringListAdd(list, "");
-    StringListAdd(list, "e");
-    StringListAdd(list, "e");
-    StringListAdd(list, "b");
+    StringListAdd(list, (char*)"a");
+    StringListAdd(list, (char*)"b");
+    StringListAdd(list, (char*)"c");
+    StringListAdd(list, (char*)"");
+    StringListAdd(list, (char*)"");
+    StringListAdd(list, (char*)"d");
+    StringListAdd(list, (char*)"");
+    StringListAdd(list, (char*)"e");
+    StringListAdd(list, (char*)"e");
+    StringListAdd(list, (char*)"b");
 
     ASSERT_EQ(StringListSize(list), 10);
 
@@ -663,8 +663,8 @@ TEST(list_replace_in_strings, multiple_element_list_replace_in_strings) {
     StringListAdd(list, before);
     StringListAdd(list, before);
     StringListAdd(list, after);
-    StringListAdd(list, "c");
-    StringListAdd(list, "d");
+    StringListAdd(list, (char*)"c");
+    StringListAdd(list, (char*)"d");
 
     ASSERT_EQ(StringListSize(list), 6);
 
@@ -802,9 +802,9 @@ TEST(list_complete_test, complete_test_1) {
 
     StringPrint(list);
     std::string output = testing::internal::GetCapturedStdout();
-    EXPECT_EQ(output, "a\nh\n\n \nc\nb\na\nd\n");
+    EXPECT_EQ(output, (char*)"a\nh\n\n \nc\nb\na\nd\n");
 
-    StringListRemove(list, "");
+    StringListRemove(list, (char*)"");
 
     words.erase(std::find(words.begin(),words.end(),""));
     char** arr;
@@ -818,10 +818,10 @@ TEST(list_complete_test, complete_test_1) {
     }
     free_string_array(arr, StringListSize(list));
 
-    ASSERT_EQ(StringListIndexOf(list, " "), 2);
-    ASSERT_EQ(StringListIndexOf(list, "a"), 0);
-    ASSERT_NE(StringListIndexOf(list, " "), 5);
-    ASSERT_EQ(StringListIndexOf(list, "d"), 6);
+    ASSERT_EQ(StringListIndexOf(list, (char*)" "), 2);
+    ASSERT_EQ(StringListIndexOf(list, (char*)"a"), 0);
+    ASSERT_NE(StringListIndexOf(list, (char*)" "), 5);
+    ASSERT_EQ(StringListIndexOf(list, (char*)"d"), 6);
 
     StringListRemoveDuplicates(list);
     words = {"a", "h", " ", "c", "b", "d"};
@@ -836,7 +836,7 @@ TEST(list_complete_test, complete_test_1) {
 
     free_string_array(arr, StringListSize(list));
 
-    StringListReplaceInStrings(list, "a", "aa");
+    StringListReplaceInStrings(list, (char*)"a", (char*)"aa");
     words = {"aa", "h", " ", "c", "b", "d"};
     StringListToString(list, &arr);
     ASSERT_EQ(StringListSize(list), 6);

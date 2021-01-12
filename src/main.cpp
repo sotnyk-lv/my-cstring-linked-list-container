@@ -7,38 +7,38 @@ int main() {
     char **list = nullptr;
     StringListInit(&list);
 
-    StringListAdd(list, "word");
+    StringListAdd(list, (char*)"word");
     StringPrint(list);
-    std::cout << StringListIndexOf(list, "q") << std::endl;
+    std::cout << StringListIndexOf(list, (char*)"q") << std::endl;
     std::cout << StringListSize(list) << "\n" << std::endl;
 
 
-    StringListAdd(list, "second_word");
-    StringListAdd(list, "3word");
-    StringListAdd(list, "4");
-    StringListAdd(list, "five");
+    StringListAdd(list, (char*)"second_word");
+    StringListAdd(list, (char*)"3word");
+    StringListAdd(list, (char*)"4");
+    StringListAdd(list, (char*)"five");
     StringPrint(list);
-    std::cout << StringListIndexOf(list, "3word") << std::endl;
+    std::cout << StringListIndexOf(list, (char*)"3word") << std::endl;
     std::cout << StringListSize(list) << "\n" << std::endl;
 
-    StringListRemove(list, "4");
+    StringListRemove(list, (char*)"4");
     StringPrint(list);
-    std::cout << StringListIndexOf(list, "4") << std::endl;
+    std::cout << StringListIndexOf(list, (char*)"4") << std::endl;
     std::cout << StringListSize(list) << "\n" << std::endl;
 
-    StringListRemove(list, "100");
+    StringListRemove(list, (char*)"100");
     StringPrint(list);
-    std::cout << StringListIndexOf(list, "100") << std::endl;
+    std::cout << StringListIndexOf(list, (char*)"100") << std::endl;
     std::cout << StringListSize(list) << "\n" << std::endl;
 
-    StringListAdd(list, "five");
-    StringListAdd(list, "word");
-    StringListAdd(list, "word");
-    StringListAdd(list, "five");
+    StringListAdd(list, (char*)"five");
+    StringListAdd(list, (char*)"word");
+    StringListAdd(list, (char*)"word");
+    StringListAdd(list, (char*)"five");
     StringPrint(list);
     std::cout << StringListSize(list) << "\n" << std::endl;
 
-    StringListReplaceInStrings(list, "word", "new_word");
+    StringListReplaceInStrings(list, (char*)"word", (char*)"new_word");
     StringPrint(list);
     std::cout << StringListSize(list) << "\n" << std::endl;
 
