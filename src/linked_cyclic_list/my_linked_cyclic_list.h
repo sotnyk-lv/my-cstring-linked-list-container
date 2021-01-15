@@ -11,8 +11,10 @@ void StringListInit(char*** list);
 void StringListDestroy(char*** list);
 /* Inserts value at the end of the src. */
 void StringListAdd(char** list, std::string str);
+void StringListAdd(char** list, char* str);
 /* Removes all occurrences of str in the src. */
 void StringListRemove(char** list, std::string str);
+void StringListRemove(char** list, char* str);
 /* Returns the number of items in the src. */
 int StringListSize(char** list);
 /* Returns the index position of the first occurrence of str in the src. */
@@ -24,11 +26,13 @@ void StringListReplaceInStrings(char** list, char* before, char* after);
 /* Sorts the src of strings in ascending order */
 void StringListSort(char** list);
 
+/* Prints the values of the list */
 void StringPrint(char** list);
+/* Deletes single node by it's reference */
 void DeleteNode(char** node);
-void StringListRemove(char** list, char* str);
-void StringListAdd(char** list, char* str);
+/* Swaps two nodes by it's reference */
 void SwapNodes(char** first, char** second);
+/* Represents list as static array for tests */
 void StringListToString(char** list, char*** res);
 
 #endif //LINKED_LIST_MY_LINKED_CYCLIC_LIST_H
