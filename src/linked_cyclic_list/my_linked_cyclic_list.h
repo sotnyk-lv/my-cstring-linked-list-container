@@ -10,10 +10,10 @@ void StringListInit(char*** list);
 /* Destroy src and set pointer to NULL. */
 void StringListDestroy(char*** list);
 /* Inserts value at the end of the src. */
-void StringListAdd(char** list, std::string str);
+void StringListAdd(char** list, std::string &str);
 void StringListAdd(char** list, char* str);
 /* Removes all occurrences of str in the src. */
-void StringListRemove(char** list, std::string str);
+void StringListRemove(char** list, std::string &str);
 void StringListRemove(char** list, char* str);
 /* Returns the number of items in the src. */
 int StringListSize(char** list);

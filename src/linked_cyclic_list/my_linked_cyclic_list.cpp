@@ -5,14 +5,20 @@
 #define PREV_NODE 2
 
 void StringListInit(char*** list) {
+    if (list == nullptr) {
+        return;
+    }
     char** curr_node = (char**)malloc(3*sizeof(char*));
     curr_node[WORD] = nullptr;
-    curr_node[NEXT_NODE] = reinterpret_cast<char *>(curr_node); // TODO: find casts types.
+    curr_node[NEXT_NODE] = reinterpret_cast<char *>(curr_node);
     curr_node[PREV_NODE] = reinterpret_cast<char *>(curr_node);
     *list = curr_node;
 }
 
 void StringListDestroy(char*** list) {
+    if (list == nullptr) {
+        return;
+    }
     char** curr_node = *list;
     curr_node = reinterpret_cast<char **>(curr_node[NEXT_NODE]);
     while (curr_node[WORD] != nullptr)
@@ -23,24 +29,13 @@ void StringListDestroy(char*** list) {
     free(curr_node);
 }
 
-void StringListAdd(char** list, std::string str) {
-
-    char** last_node = reinterpret_cast<char **>(list[PREV_NODE]);
-
-    char** new_node = (char**) malloc(3 * sizeof(char**));
-
-    char* word = (char*) malloc((str.length()+1) * sizeof(char));
-    strcpy(word, str.c_str());
-    new_node[WORD] = word;
-
-    new_node[NEXT_NODE] = reinterpret_cast<char *>(list);
-    new_node[PREV_NODE] = reinterpret_cast<char *>(last_node);
-    last_node[NEXT_NODE] = reinterpret_cast<char *>(new_node);
-    list[PREV_NODE] = reinterpret_cast<char *>(new_node);
-
+void StringListAdd(char** list, std::string &str) {
+    StringListAdd(list, (char*)str.c_str());
 }
 
 void StringListAdd(char** list, char* str) {
+    // last_node -v  v- terminal node
+    //       ^- new_node -^
 
     char** last_node = reinterpret_cast<char **>(list[PREV_NODE]);
 
@@ -54,47 +49,10 @@ void StringListAdd(char** list, char* str) {
     new_node[PREV_NODE] = reinterpret_cast<char *>(last_node);
     last_node[NEXT_NODE] = reinterpret_cast<char *>(new_node);
     list[PREV_NODE] = reinterpret_cast<char *>(new_node);
-
-    // last_node -v  v- terminal node
-    //       ^- new_node -^
-
 }
 
-void StringPrint(char** list) {
-    char** curr_node = reinterpret_cast<char **>(list[NEXT_NODE]);
-    while (curr_node[WORD] != nullptr)
-    {
-//        std::cout << curr_node[WORD] << std::endl;
-        printf("%s\n", curr_node[WORD]);
-        curr_node = reinterpret_cast<char **>(curr_node[NEXT_NODE]);
-    }
-}
-
-void DeleteNode(char** node) {  // TODO: deleting terminal node!
-    if (node[WORD] == nullptr) {
-        return;
-    }
-    char** next_node = reinterpret_cast<char **>(node[NEXT_NODE]);
-    char** prev_node = reinterpret_cast<char **>(node[PREV_NODE]);
-    next_node[PREV_NODE] = reinterpret_cast<char *>(prev_node);
-    prev_node[NEXT_NODE] = reinterpret_cast<char *>(next_node);
-    free(node[WORD]);
-    free(node);
-}
-
-
-void StringListRemove(char** list, std::string str) {
-    char** curr_node = reinterpret_cast<char **>(list[NEXT_NODE]);
-    while (curr_node[WORD] != nullptr)
-    {
-        if (((curr_node[WORD]) != nullptr) && (strcmp(str.c_str(), curr_node[WORD]) == 0)) {
-            curr_node = reinterpret_cast<char **>(curr_node[NEXT_NODE]);
-            DeleteNode(reinterpret_cast<char **>(curr_node[PREV_NODE]));
-        }
-        else {
-            curr_node = reinterpret_cast<char **>(curr_node[NEXT_NODE]);
-        }
-    }
+void StringListRemove(char** list, std::string &str) {
+    StringListRemove(list, (char*)str.c_str());
 }
 
 void StringListRemove(char** list, char* str) {
@@ -156,17 +114,6 @@ void StringListReplaceInStrings(char** list, char* before, char* after) {
     }
 }
 
-void SwapNodes(char** first, char** second) {
-    char* new_first_word = (char*) malloc((strlen(second[WORD])+1)* sizeof(char));
-    strcpy(new_first_word, second[WORD]);
-    char* new_second_word = (char*) malloc((strlen(first[WORD])+1)* sizeof(char));  // realloc?
-    strcpy(new_second_word, first[WORD]);
-    free(first[WORD]);
-    free(second[WORD]);
-    first[WORD] = new_first_word;
-    second[WORD] = new_second_word;
-}
-
 void StringListSort(char** list) {
     bool if_done = false;
     char** first = reinterpret_cast<char **>(list[NEXT_NODE]);
@@ -187,6 +134,39 @@ void StringListSort(char** list) {
             second = reinterpret_cast<char **>(first[NEXT_NODE]);
         }
     }
+}
+
+void StringPrint(char** list) {
+    char** curr_node = reinterpret_cast<char **>(list[NEXT_NODE]);
+    while (curr_node[WORD] != nullptr)
+    {
+//        std::cout << curr_node[WORD] << std::endl;
+        printf("%s\n", curr_node[WORD]);
+        curr_node = reinterpret_cast<char **>(curr_node[NEXT_NODE]);
+    }
+}
+
+void DeleteNode(char** node) {
+    if (node[WORD] == nullptr) {
+        return;
+    }
+    char** next_node = reinterpret_cast<char **>(node[NEXT_NODE]);
+    char** prev_node = reinterpret_cast<char **>(node[PREV_NODE]);
+    next_node[PREV_NODE] = reinterpret_cast<char *>(prev_node);
+    prev_node[NEXT_NODE] = reinterpret_cast<char *>(next_node);
+    free(node[WORD]);
+    free(node);
+}
+
+void SwapNodes(char** first, char** second) {
+    char* new_first_word = (char*) malloc((strlen(second[WORD])+1)* sizeof(char));
+    strcpy(new_first_word, second[WORD]);
+    char* new_second_word = (char*) malloc((strlen(first[WORD])+1)* sizeof(char));  // realloc?
+    strcpy(new_second_word, first[WORD]);
+    free(first[WORD]);
+    free(second[WORD]);
+    first[WORD] = new_first_word;
+    second[WORD] = new_second_word;
 }
 
 void StringListToString(char** list, char*** result) {
