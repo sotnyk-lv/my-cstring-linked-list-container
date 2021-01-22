@@ -16,6 +16,9 @@ void StringListInit(char*** list) {
 }
 
 void StringListDestroy(char*** list) {
+    if (list == nullptr) {
+        return;
+    }
     char** curr_node = *list;
     curr_node = reinterpret_cast<char **>(curr_node[NEXT_NODE]);
     while (curr_node[WORD] != nullptr)
